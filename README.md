@@ -75,3 +75,4 @@ Make sure to set these environment variables in your Vercel project settings:
 
 - `NOTION_API_TOKEN`
 - `NOTION_DATABASE_ID` # Rotbot
+# Rotbotweb
