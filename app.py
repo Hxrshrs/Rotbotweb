@@ -65,7 +65,7 @@ print("================================\n")
 def init_custom_prompts_file():
     if not os.path.exists(CUSTOM_PROMPTS_FILE):
         with open(CUSTOM_PROMPTS_FILE, 'w') as f:
-            json.dump({"custom_prompt": "", "system_instruction": ""}, f)
+            json.dump({"custom_prompt": "generate one story", "system_instruction": ""}, f)
 
 # Load custom prompts from file
 def load_custom_prompts():
@@ -74,7 +74,7 @@ def load_custom_prompts():
         with open(CUSTOM_PROMPTS_FILE, 'r') as f:
             return json.load(f)
     except:
-        return {"custom_prompt": "", "system_instruction": ""}
+        return {"custom_prompt": "generate one story", "system_instruction": ""}
 
 # Save custom prompts to file
 def save_custom_prompts(custom_prompt, system_instruction):
@@ -1280,17 +1280,31 @@ Please provide your response in the following JSON structure:
 
 Keep the summary points simple and easy to understand, as if explaining to a 6th-grade student.
 Each point should be a complete thought that helps understand the story's progression.
+IMPORTANT: Do not use asterisks (*) anywhere in your response.
 """
         response = model.generate_content(system_prompt)
         content = response.text
+        
+        # Remove any asterisks from the response
+        content = content.replace('*', '')
+        
         try:
             content_json = json.loads(content)
             title = content_json.get('title', '')
             story = content_json.get('story', '')
+            
+            # Ensure no asterisks in the output
+            title = title.replace('*', '')
+            story = story.replace('*', '')
         except json.JSONDecodeError:
             lines = content.split('\n')
             title = next((line for line in lines if line.strip()), '')
             story = ' '.join(line for line in lines[1:] if line.strip())
+            
+            # Ensure no asterisks in the output
+            title = title.replace('*', '')
+            story = story.replace('*', '')
+            
         return jsonify({'success': True, 'title': title, 'story': story})
     except Exception as e:
         print(f"Error generating content: {e}")
@@ -1329,6 +1343,7 @@ Rules:
 5. Keep the title concise and engaging
 6. Keep summary points simple and easy to understand, as if explaining to a 6th-grade student
 7. Each summary point should be a complete thought that helps understand the story's progression
+8. IMPORTANT: Do not use asterisks (*) anywhere in your response
 """
         complete_system_instruction = f"{system_instruction}\n\n{structured_output_guide}"
 
@@ -1340,6 +1355,10 @@ Rules:
         
         response = model.generate_content(contents)
         content = response.text
+        
+        # Remove any asterisks from the response
+        content = content.replace('*', '')
+        
         return jsonify({'success': True, 'result': content})
     except Exception as e:
         print(f"Error in custom generate: {e}")
@@ -1419,6 +1438,7 @@ Rules:
 4. Avoid using double quotes (") inside story text
 5. Keep the title concise and engaging
 6. Include all metadata fields
+7. IMPORTANT: Do not use asterisks (*) anywhere in your response
 """
         complete_system_instruction = f"{system_instruction}\n\n{structured_output_guide}"
             
@@ -1449,6 +1469,9 @@ Rules:
             response = model.generate_content(contents)
             
         content = response.text
+        
+        # Remove any asterisks from the response
+        content = content.replace('*', '')
         
         return jsonify({'success': True, 'result': content})
     except Exception as e:
@@ -1501,6 +1524,7 @@ def generate_summary():
         # Prepare the prompt for the AI
         summary_prompt = f"""Please summarize this story in 4-5 simple points (one line each) that a 7th grader could understand. 
         Don't include names or complex details. Make it simple and clear.
+        Do NOT use asterisks (*) anywhere in your response.
         
         Story:
         {story}
@@ -1522,10 +1546,19 @@ def generate_summary():
         
         # Extract and parse the response
         result = response.text
+        
+        # Remove any asterisks from the response
+        result = result.replace('*', '')
+        
         try:
             # Clean up any markdown formatting
             cleaned_result = result.replace('```json', '').replace('```', '').strip()
             summary_data = json.loads(cleaned_result)
+            
+            # Ensure no asterisks in summary points
+            if 'summary' in summary_data and isinstance(summary_data['summary'], list):
+                summary_data['summary'] = [point.replace('*', '') for point in summary_data['summary']]
+                
             return jsonify({'success': True, 'summary': summary_data['summary']})
         except json.JSONDecodeError:
             return jsonify({'success': False, 'error': 'Failed to parse AI response'})
