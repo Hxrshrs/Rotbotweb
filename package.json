@@ -1,0 +1,14 @@
+{
+  "name": "web-thumbmaker",
+  "version": "1.0.0",
+  "description": "Web thumbnail maker for RotBot",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r public/* dist/",
+    "netlify-build": "echo 'Static site, no build needed'"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+} 

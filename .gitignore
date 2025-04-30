@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build artifacts
+build/
+dist/
+
+# Generated content
+story_stack.json
+custom_prompts.json
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Media files
+static/images/*.png
+static/images/*.jpg
+static/images/*.jpeg
+static/images/*.gif
+
+# Log files
+*.log
+
+# Virtual Environment
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

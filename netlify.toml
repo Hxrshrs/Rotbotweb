@@ -1,0 +1,40 @@
+[build]
+  publish = "dist"
+  command = "rm -f Pipfile Pipfile.lock requirements.txt runtime.txt setup.py && mkdir -p dist && cp -r public/* dist/ && echo 'Static site, no build needed'"
+  
+[build.environment]
+  NODE_VERSION = "18"
+  # Disable Python detection
+  PYTHON_VERSION = "off"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://rotbot-backend.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/static/*"
+  to = "https://rotbot-backend.onrender.com/static/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/api/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "X-Requested-With, Content-Type, Accept"
+
+[[headers]]
+  for = "/static/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Access-Control-Allow-Headers = "X-Requested-With, Content-Type, Accept"
+    Cache-Control = "public, max-age=31536000, immutable" 

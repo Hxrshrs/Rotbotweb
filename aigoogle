@@ -1,0 +1,529 @@
+# To run this code you need to install the following dependencies:
+# pip install google-genai
+
+import base64
+from google import genai
+from google.genai import types
+
+
+def generate():
+    client = genai.Client(
+        vertexai=True,
+        project="",
+        location="",
+    )
+
+    model = "gemini-2.5-flash-preview-04-17"
+    contents = [
+        types.Content(
+            role="model",
+            parts=[
+                types.Part.from_text(text="""The user wants a Reddit-style story, similar to the provided examples, formatted as a Python string.
+
+Here's a plan:
+1.  **Analyze Request:** The request is clear - generate a long (4k-8k words), emotional, Reddit-style story with a title and updates, formatted as a Python string. The core elements are based on betrayal, relationships, emotional depth, suspense, and a conversational tone, mirroring r/relationships or r/AITA.
+2.  **Choose Theme:** I'll go with a classic relationship betrayal theme, combining elements of infidelity and possibly financial manipulation or a hidden past, similar to the example analysis. Let's make it a husband hiding something significant.
+3.  **Craft Title:** Needs to be clickable, emotional, specific, and hint at betrayal. Something about a partner saying something awful or a secret revealed by an unexpected source. \"My Husband Called Me Too Emotional and Now I Found Out Why He Needed Me Quiet\" or similar. Let's refine: \"My Husband Dismissed My Concerns as 'Emotional Overreactions' Until His Secret Blew Up Our Lives\".
+4.  **Outline Story Structure:**
+    *   **Initial Post:** Introduce protagonist (F, 30s), husband (M, 30s), relationship length (5-7 years), cohabitation, maybe kids or trying for kids. Describe a recent incident where he dismisses her feelings or expresses dissatisfaction. Hint at underlying tension, strange behavior, or a specific red flag. End with a moment of dawning suspicion or a cryptic message/discovery. Target ~1000 words.
+    *   **Update 1:** Protagonist investigates or receives more information (maybe from a friend, family member, or through their own snooping/discovery). The initial suspicion is confirmed or a new, worse secret is revealed. Confrontation with the husband. His reaction (denial, gaslighting, partial confession). Emotional fallout. Practical steps taken (e.g., staying elsewhere). End with the next step planned (e.g., meeting someone involved, gathering evidence). Target ~1000-1500 words.
+    *   **Update 2:** Meeting with the key person involved (the 'other woman', a business partner, a family member who knows). Full revelation of the secret (infidelity, significant debt, hidden family, etc.). Protagonist's reaction. More confrontation with the husband. Decision to leave/divorce. Practicalities (legal advice, freezing accounts, finding a place to stay). Emotional processing. End with a challenging immediate future step (e.g., telling family, starting the legal process). Target ~1000-1500 words.
+    *   **Update 3:** Navigating the immediate aftermath (moving out, initial legal steps). Husband's reaction (begging, blaming, escalating behavior). Support system kicks in (friends, family). Emotional ups and downs. Small victories or setbacks. Dealing with the practical mess (finances, shared property). End with a moment of resilience or a difficult hurdle ahead. Target ~800-1000 words.
+    *   **Final Update:** Time jump (weeks/months). Protagonist is rebuilding. Progress on practical issues (divorce finalized, debt sorted). Emotional healing (therapy, self-care). Reflection on the experience. Future outlook (single life, new apartment, lessons learned). A final interaction or observation about the ex. End on a hopeful or determined note, inviting community interaction. Target ~800-1000 words.
+5.  **Write Narrative:**
+    *   Use a confessional, first-person tone.
+    *   Incorporate Reddit-isms (\"throwaway,\" \"obligatory LTL, FTP,\" \"girlies,\" \"stress-eating\").
+    *   Describe feelings, settings, and interactions vividly (\"my stomach dropped,\" \"the air felt thick,\" \"his eyes were cold\").
+    *   Escalate the conflict and emotional stakes in each update.
+    *   Weave in mundane details for realism (work, chores, pet).
+    *   Ensure transitions between updates feel natural, covering elapsed time.
+    *   Check word count as I write, adding detail or expanding on emotional processing/practical steps as needed to hit 4k-8k words.
+6.  **Format as Python String:** Enclose the entire text, including the title line, in triple quotes `\"\"\"`. Escape any internal triple quotes or backslashes if necessary (though unlikely in this content). Ensure proper paragraph breaks using double newlines.
+
+Okay, planning complete. I will now proceed with writing the story following this outline and applying the specified strategies and formatting."""),
+                types.Part.from_text(text="""```python
+\"\"\"
+Title: My Husband Dismissed My Concerns as 'Emotional Overreactions' Until His Secret Blew Up Our Lives
+
+Okay, Reddit. I'm typing this from the passenger seat of my best friend Sarah's car, somewhere on the highway heading out of town. My hands are shaking so much it's hard to see the screen. I need to get this off my chest, process it somewhere, because I genuinely feel like my entire reality just imploded. My husband, Mark (34M), and I (32F) have been together for 7 years, married for 4. We built a life: a comfortable little house, two rescue cats, shared dreams of traveling when we retired. He was my rock, my safe place. Or so I thought.
+
+Things haven't been perfect lately. The last six months have been... off. Mark became distant, quiet. He'd snap at me over small things – a misplaced remote, the way I loaded the dishwasher. When I tried to talk about it, he'd shut down, saying I was being \"too emotional,\" \"overthinking,\" or \"making problems out of nothing.\" He'd roll his eyes or sigh dramatically, making me feel like I was crazy for noticing the shift. I started questioning myself, wondering if I'd become needy or if work stress was just getting to *him*. He works in finance, long hours, high pressure, so I tried to be understanding. I’d bring him coffee, cook his favorite meals, give him space. But the coldness persisted, and the invalidation stung every time. \"You're overreacting, Sarah,\" he'd say, using my name pointedly. \"It's fine. I'm just tired.\"
+
+The weirdness escalated. He became secretive with his phone, taking calls in another room, deleting message threads. He started working even later, sometimes not coming home until after I was asleep. Our shared savings account balance seemed stagnant, even though we both had decent salaries. When I asked about it, he’d get defensive. \"Don't worry about it,\" he'd say. \"I'm handling our finances. Just trust me.\" And like an idiot, I did. I trusted him. He’s the finance guy, right? He knows what he's doing.
+
+Last week, he went on a \"business trip\" to Chicago. It was sudden, only two days' notice. He was jumpy packing, avoided eye contact. He barely called while he was there, just a few rushed texts. My gut was screaming. I felt it physically – a knot in my stomach that wouldn't go away. Sarah told me I needed to trust my intuition, that dismissing my feelings was a huge red flag. She suggested couples therapy, which I tentatively brought up to Mark. His reaction was immediate and furious. \"Therapy? For what? Because you can't handle me being busy? Stop being so dramatic! You always need something to be wrong!\" He stormed out and didn't come home that night, sleeping on his friend Tom's couch (the same Tom who always seemed a bit off, too).
+
+That night, alone in the silent house with just the cats for company, I couldn't sleep. I kept replaying his words, his anger, his dismissal. Was I dramatic? Was I making things up? Or was something seriously wrong? The silence felt heavy, full of things unsaid. I walked around the house, feeling like a ghost in my own life. That's when I saw it. Tucked under the edge of the rug near his side of the bed was a small, folded piece of paper. It looked like a receipt. My heart started doing that weird, fluttery thing it does when I'm terrified. I unfolded it slowly. It was a receipt for a jewelry store I didn't recognize, dated a few weeks ago. The purchase? A diamond pendant.
+
+My mind raced. He hadn't bought me jewelry. It wasn't my birthday, our anniversary, nothing. Who was it for? The address on the receipt was downtown, not near his office or any stores we usually go to. And the amount... it was significant. More than he'd ever spent on jewelry for me. The knot in my stomach tightened into a physical ache. I sat on the edge of the bed, the receipt crumpled in my hand, the cats watching me with their big, unblinking eyes. I felt cold, utterly alone. This wasn't just work stress or tiredness. This was a secret. And suddenly, all his dismissiveness, his \"overreactions\" comments, clicked into place. He wasn't tired; he was hiding. He needed me to doubt myself, to keep quiet, so I wouldn't find out what he was really doing.
+
+I didn't sleep at all. I just sat there, the receipt a burning ember in my hand, the silence of the house amplifying the chaos in my head. By morning, a cold, hard resolve had replaced the fear. I knew, with a certainty that chilled me to the bone, that my marriage was not what I thought it was. I didn't know *what* was happening, but I knew it was bad. I texted Sarah: \"Something's happened. Can you come over? Need you.\" She was here within the hour, took one look at my face and the receipt, and said, \"Okay. We'll figure this out.\" That's where I am now. Driving away with Sarah, having left a note for Mark saying I'd be in touch. Reddit, I don't know what I'm going to find, but I can't stay there pretending anymore. What do I even do next? How do I prepare myself for whatever truth is waiting?
+
+**Update 1**: Thank you, everyone, for the overwhelming support and advice. It means more than you know right now. I read every single comment last night at Sarah's place. The consensus was clear: trust my gut, don't confront him alone, gather information. And you were all right. The diamond pendant was just the tip of the iceberg.
+
+Sarah helped me get a temporary hotel room because I couldn't face staying at her apartment long-term. It feels sterile and anonymous, which is weirdly comforting right now. First thing yesterday, I followed some of your advice. I called a divorce lawyer for a consultation. He was calm, professional, and gave me practical steps. freeze any joint credit lines, gather financial documents, and don't delete anything. He confirmed that dismissing concerns and hiding finances are classic red flags in infidelity and financial misconduct cases. Hearing a professional validate my fears helped cut through the self-doubt Mark had so carefully built.
+
+Gathering financial documents was hard. Mark was always the primary handler of our money, supposedly because he was \"better at it.\" But I had access to our shared online banking portal. I logged in, and my stomach plummeted again. Our joint savings was lower than I thought, stagnant for months. There were large, unexplained transfers *out* of the account, labeled vaguely. And the credit card statement... oh god. There were charges for expensive dinners, luxury hotels in cities he wasn't supposed to be in, thousands of dollars in \"business expenses\" that looked suspiciously like personal high living. And a few charges for... a pet store? We already have two cats. What pet store?
+
+While I was doing this, Sarah was being a rockstar. She remembered Mark mentioning his \"business trip\" was to Chicago. She started doing some digging online. She found a social media profile for a woman named 'Chloe,' based in Chicago, who works in... a related financial field. Chloe's profile was public. Lots of photos of her life. Scrolling through them, I saw pictures taken recently: at a fancy restaurant, posing in front of a city skyline... places and dates that exactly matched charges on Mark's credit card statement from his \"business trip.\" Then I saw a photo posted two weeks ago: Chloe smiling, holding a small dog, a fluffy white thing. The caption? \"My new best friend! Thanks [Mark's last name] for the sweetest surprise!\"
+
+My hands started shaking again. The diamond pendant. The pet store charges. The \"business trips.\" Chloe in Chicago. It all clicked into place with a sickening thud. It wasn't just cheating. It was a whole other life he was funding with our money, building a future or at least a luxurious present with someone else. He wasn't just betraying me; he was financially draining us, gaslighting me into thinking I was crazy, while he was buying another woman dogs and jewelry and taking her on fancy trips. The anger that surged through me was unlike anything I've ever felt. It was hot, raw, consuming.
+
+I didn't call him. I was too enraged, too heartbroken, too... something. I blocked him on my phone, unfollowed him on social media. I knew I couldn't be in the same physical space as him yet. I needed to be calm, clear-headed, for the confrontation. The lawyer advised me to communicate only through email from now on, keep records of everything. So, I drafted an email. Short, cold, to the point: \"I know about Chloe, the trips, the spending, the dog. I've consulted a lawyer. Do not contact me directly. All communication must go through [Lawyer's Name] from now on. I will be arranging to collect my things.\"
+
+I sent it late last night. My phone has been buzzing non-stop with his calls and texts to Sarah (I gave her permission to screen them). He's panicked, begging, denying, blaming. Standard abuser stuff, my lawyer said. He's tried calling my parents and my sister, who are now also aware and furious on my behalf. This is real. My marriage is over. I'm starting over at 32, leaving the life I built, because the man I loved was living a double life and stealing from me to do it. Tomorrow, I'm meeting the lawyer again to start the actual divorce proceedings and figure out the financial mess. This is going to be a long, ugly fight. Reddit, how do you even begin to pick up the pieces when everything feels shattered? Has anyone recovered from this level of betrayal?
+
+**Update 2**: Deep breath. Still in the hotel. Still relying heavily on Sarah and my family. The last few days have been a blur of logistics and emotional wreckage. The email worked. Mark stopped contacting *me* directly (mostly), but he's been blowing up Sarah's phone with increasingly desperate and unhinged messages. He's moved from denial and begging to anger and threats, claiming I'm destroying his life, that I'm being \"vindictive,\" that he \"barely knew\" Chloe and she was \"just a friend\" he was helping out (with diamond pendants and dogs, sure, Mark). He also claimed the Chicago trips were *real* business trips where he just happened to meet up with Chloe a few times. The lies are pathetic, but still somehow manage to twist the knife.
+
+The meeting with the lawyer was eye-opening and, frankly, terrifying. The amount of money Mark has spent on this double life is significant. Not just the trips and gifts, but it looks like he's been funneling money into something else, maybe a failed investment or more gambling? It's hard to tell from the vague transactions. The lawyer is recommending a forensic accountant to track where the money went. This means the divorce will be complicated and expensive. My meager personal savings aren't going to cover this. My parents have generously offered to help with legal fees, for which I am eternally grateful, but I feel like such a failure, having to rely on them at my age because my husband secretly stole from me.
+
+We also started discussing assets. The house. Our cars. Retirement accounts. Everything is intertwined. Mark is already trying to hide assets, according to the lawyer, trying to move money around. It adds another layer of stress to an already impossible situation. The lawyer advised me to get a restraining order if Mark's behavior escalates, especially based on his increasingly aggressive texts to Sarah. It feels surreal that I might need legal protection from the man I married.
+
+Amidst all this, I had to tell *my* friends. It was brutal. Meeting them for coffee, having to explain that my seemingly perfect marriage was a lie, that Mark was a cheater and potentially a financial criminal. Their shock quickly turned to fierce protectiveness. My friend Jess, who's usually quiet, was livid, suggesting ways to publicly shame him (which I'm not doing, per lawyer's advice, but the thought was strangely comforting). My friend Liam, who works in IT, offered to help me secure my digital life – changing passwords, checking for spyware (yes, that thought crossed my mind, thanks Mark). It felt good to have a wall of support around me.
+
+The hardest part emotionally? Mourning the future I thought I had. We were planning a trip to Italy next year. We talked about having kids in a few years. We had inside jokes, traditions, a shared history that now feels poisoned. Every memory is tainted by the knowledge that he was lying, planning, and funding another life while he was holding my hand or watching a movie with me on the couch. It's like looking at a photo album where half the pictures are fake. I cry in waves. Sometimes it's hot, angry tears. Sometimes it's just a hollow ache. The cats miss him too, sitting by the door. That breaks my heart a little more.
+
+Tomorrow is a big day. I'm scheduled to go back to the house with Sarah and a police escort (as a precaution, given Mark's texts) to collect my essential belongings. Clothes, important documents, sentimental items, and most importantly, the cats. I dread seeing him, dread being in that house that feels like a stranger's now. I don't know what his reaction will be. Will he be there? Will he try to talk to me? The lawyer said to just focus on getting my things and getting out. It feels like I'm preparing for battle. Reddit, please send me strength for tomorrow. This feels insurmountable. How do you walk back into the place where your heart was broken to salvage the pieces of your life?
+
+**Update 3**: I did it. I went back to the house, and I survived. It was... awful, but also empowering in a weird way. Sarah came with me, and a police officer met us there. Mark was there, pacing in the living room. When he saw the police officer, his face went pale. He tried to approach me, but the officer stepped between us and told him to stay put and not speak to me. Mark started ranting, saying this was unnecessary, that I was \"overreacting\" again, that he just wanted to \"talk things through.\" Hearing him use that phrase, \"overreacting,\" in front of a police officer, after everything I know, was almost comical in its audacity.
+
+I ignored him, or tried to. I walked through the house, the house we chose together, decorated together, lived in together, and felt nothing but emptiness and a profound sense of loss, not for him, but for the life I thought we had. I went to the bedroom, ignoring the side of the closet where his clothes still hung. Sarah helped me pack quickly: clothes, shoes, toiletries, my laptop, photo albums, my journal. The police officer stood by, ensuring Mark didn't interfere. Mark kept muttering, sometimes loud enough for me to hear, complaining about me taking \"his\" things (like *my* clothes and *our* shared photo albums). He actually whined, \"Are you taking the good towels?\" I swear, the level of entitlement was staggering.
+
+Getting the cats was a relief. They were confused and a little scared by the commotion, but once they were in their carriers, purring nervously, I felt a fierce protectiveness. They're my family now. We packed the car quickly. As we were leaving, Mark stood in the doorway, looking defeated. He didn't say anything else, just watched us go. Driving away, seeing the house shrink in the rearview mirror, was a mix of relief and sorrow. It's over. That chapter is closed.
+
+I'm back at the hotel, surrounded by boxes. It feels like I'm starting over with literal baggage. The cats are slowly getting used to the new space, exploring cautiously. Sarah stayed with me last night, ordering pizza and just being present. We talked for hours, about everything and nothing. It helped ground me. She reminded me of my strength, of who I was before Mark started dimming my light.
+
+Financially, things are still messy. The lawyer is filing motions to freeze more accounts and start the discovery process. It's like peeling back layers of an onion, each layer revealing something more complicated or frustrating. The forensic accountant is on retainer. Just saying \"forensic accountant\" feels like I'm in a crime drama, not my own life. My parents wired money for legal fees, which is a huge burden lifted, but I still feel the weight of this financial fallout Mark created. He didn't just break my heart; he created a potential financial crisis for me too.
+
+Emotionally, I'm swinging wildly between grief, anger, and moments of strange clarity. I had a good cry this morning, mourning the lost years, the wasted energy trying to fix something that was fundamentally broken by his deceit. Then, I had a moment where I looked in the mirror and saw myself, not Mark's wife, not the woman he gaslighted, but just me. And it felt... okay. Scary, but okay.
+
+One positive thing: I reached out to my old boss. I'd left my job a few years ago to pursue something more flexible when we were planning to potentially start a family. Turns out, there's an opening in my old department. She was incredibly supportive and encouraged me to apply. It feels like a tiny spark of hope in the darkness. Rebuilding my career feels like a concrete step I can take, something I have control over.
+
+Tomorrow, the real work of finding a place to live starts. The hotel is temporary. I need a home for me and the cats. It feels overwhelming to think about finding an apartment, signing a lease, moving furniture (what little I took, anyway). But thinking about having my own space, a space not tainted by lies, gives me a little boost. Reddit, this is the messy middle. It's hard and exhausting. How do you keep going when the legal and financial fight is just starting and the emotional toll is immense? Any advice for navigating the bureaucracy of divorce and finding your footing financially?
+
+**Update 4**: It's been a month since I left the house. A month of living out of boxes, navigating lawyers, looking at apartments, and trying to find my footing. I found a small but cozy apartment in a neighborhood I like. It has a tiny balcony perfect for the cats to sunbathe safely. Moving in was physically exhausting but emotionally cathartic. Each box I unpacked felt like reclaiming a piece of myself. I bought some new bedding and a ridiculous number of plants. The space is mine. It feels clean, safe, and quiet in a good way, not the heavy silence of the old house.
+
+The divorce is moving forward slowly, as expected. The forensic accountant has uncovered more. It turns out Mark wasn't just spending money on Chloe and trips; he was making risky, speculative investments with large sums of *our* money, sometimes taking out loans against accounts to do it. The \"business trips\" to Chicago weren't entirely fake – he *was* meeting with potential investors or business contacts, but he was using those trips to meet Chloe and live it up, expensing everything. He's also significantly in debt from these failed ventures and his lifestyle spending. He tried to hide some accounts, but the forensic accountant is good. The lawyer says it's a complex case, and I might be on the hook for some of the debt, or at least lose a significant portion of our joint assets to cover it. It's terrifying and makes me so angry that his irresponsibility and deceit could ruin me financially.
+
+Mark's communication is now strictly through his lawyer, which is a blessing. He tried one last-ditch attempt to contact me through an old email address I hadn't blocked yet, claiming he was in \"dire financial straits\" and needed me to sign something quickly to \"save us both.\" My lawyer saw right through it – he was likely trying to get me to take on more of his debt or sign away assets. I didn't respond.
+
+My job search is going well. I had a second interview for the position at my old company, and they made me an offer! It's a good role, slightly higher level than before, and the salary will make a huge difference in rebuilding my financial security. I start next week. It feels like a lifeline. It’s stable, familiar work, and the team there was always like a second family. It's the first piece of genuinely good news in months.
+
+Emotionally, I have good days and bad days. The bad days are tough. I still get flashbacks to things he said, things I dismissed, red flags I ignored. I struggle with feeling stupid for trusting him, for not seeing it sooner. Therapy has been crucial. My therapist is helping me process the trauma of the betrayal and the gaslighting, and rebuild my self-worth. We're working on trusting my own judgment again.
+
+The cats are settled in and seem to love the balcony. They're a huge source of comfort. My friends and family are still incredibly supportive. Sarah helped me paint the living room. My sister helped me assemble furniture. My parents took me out for a celebratory dinner for the job offer. I'm not alone.
+
+I'm learning to enjoy small things again. The taste of coffee in the morning on my balcony. Reading a book without feeling anxious about what Mark is doing. Going for walks in my new neighborhood. Retail therapy (within my budget now!) for apartment essentials has been surprisingly therapeutic. I bought a ridiculously soft throw blanket and it felt like a major victory.
+
+This isn't the life I planned. It's harder, messier, and scarier than anything I could have imagined. But I'm here. I'm surviving. I'm fighting for my future. The divorce is ongoing, the financial implications are still unclear, and the emotional scars are deep. But for the first time in a long time, I feel like I'm moving forward, not just stuck in the wreckage. Reddit, this community gave me so much strength and practical advice in those first terrifying days. What are the next steps in truly healing and building a new, independent life? Any advice for navigating post-divorce life and rediscovering joy?
+
+**Final Update**: Wow. It's been six months since I first posted, pouring my heart out in that coffee shop parking lot. A lot has changed. The divorce is final. It was messy, financially challenging, but it's done. The forensic accountant's findings were damning. Mark had indeed blown through a massive amount of our money on failed investments and his Chicago lifestyle. The judge ordered a division of assets that accounted for his wasteful spending and debt, though I still ended up taking a hit to my savings. It wasn't a perfect outcome, but it was fair, and I'm not saddled with his personal debt. The house was sold, the proceeds split after debts were paid. It felt strange signing the papers, like closing a book I never wanted to read.
+
+Mark... I haven't seen him since that day I collected my things. I heard through a mutual acquaintance that he's living in a tiny apartment, struggling financially, and blaming everyone but himself. He's also facing some scrutiny at his old firm because of the way he handled expenses and the questionable investments. Chloe is apparently out of the picture; turns out she wasn't interested in sticking around when his money ran out and his life imploded. poetic justice, I guess, but mostly I just feel tired thinking about him. He's his own problem now.
+
+My new apartment is starting to feel like a real home. The plants are thriving (even bought another one!). The cats are fully settled, ruling the place with their fluffy paws. I got a small raise at my job and feel confident and capable there. It's incredibly empowering to be earning my own money, managing my own finances, and building my own security after everything. I've set up a budget, started rebuilding my emergency fund, and even opened a small investment account – doing it *my* way, cautiously and knowledgeably.
+
+Healing is a journey, not a destination. Some days are still hard. Anniversaries, holidays, or even just hearing a song can bring back memories and a pang of sadness for the lost dream. But the waves of grief are less frequent, less overwhelming. Therapy continues to be invaluable. I'm learning to trust myself again, to listen to my intuition, and to recognize my own worth, which is completely independent of anyone else's opinion or actions. Mark's voice, telling me I'm \"too emotional\" or \"overreacting,\" still pops into my head sometimes, but now I recognize it for what it was: a tool of manipulation to keep me small and quiet. I talk back to that voice now, or just dismiss it. My emotions are valid. My intuition is powerful.
+
+I'm slowly dipping my toes back into social activities outside of my core group of friends. I joined a book club, started taking a pottery class, and even went on a few casual dates (nothing serious yet, and I'm being *very* cautious, but it feels good to remember what it's like to connect with people in a healthy way). I'm focusing on building a life that makes *me* happy, filled with things I love and people who lift me up.
+
+This experience nearly broke me, but it also showed me how resilient I am. I faced betrayal, financial uncertainty, and the complete dismantling of my life, and I came through it. I'm stronger, wiser, and more determined than ever. I lost a husband and a future I thought I wanted, but I gained my freedom, my independence, and a profound understanding of my own strength.
+
+To anyone going through something similar, listen to your gut. Get support. Get legal and financial advice. You are not crazy, you are not overreacting. Your feelings are valid. You deserve truth and respect. It will be incredibly hard, but you can get through it.
+
+Thank you, Reddit, for being a lifeline in my darkest moments. Reading your comments, hearing your stories of survival, gave me the courage I needed to leave and fight. This isn't the end of my story, it's just the beginning of a new one. What are your best tips for thriving after divorce and reclaiming your identity?
+
+\"\"\"
+```"""),
+            ],
+        ),
+        types.Content(
+            role="user",
+            parts=[
+                types.Part.from_text(text="""one more"""),
+            ],
+        ),
+        types.Content(
+            role="model",
+            parts=[
+                types.Part.from_text(text="""The user wants another Reddit-style story, following the same detailed instructions as the previous one.
+
+Plan:
+1.  **Analyze the examples and previous successful generation:** Reconfirm the key elements: r/relationships/AITA style, betrayal/secrets theme, multiple updates, emotional tone, 4k-8k words, Python string format, clickable title, immediate hook, escalating conflict, mundane details, supporting characters, call for advice/community interaction.
+2.  **Choose a new theme:** Let's go with a theme combining romantic betrayal with toxic family influence and a significant secret. A secret family obligation or financial burden the partner hid, perhaps related to their family's issues.
+3.  **Craft a title:** Needs to be emotionally charged, specific, and hint at the central conflict and the reveal source. \"My Husband Hid His Family's Massive Debt From Me For Years, and His Brother Just Blew It Up\" or \"My Husband's 'Support' for His Family Was a Secret Financial Sinkhole, Revealed by His Annoyed Sister\". Let's go with something like: \"My Husband's Secret Sacrifices For His Family Wiped Out Our Savings, And His Sister Just Confirmed My Fears\".
+4.  **Outline the story:**
+    *   **Initial Post:** Narrator (30s F) is happy, maybe planning family (kids/house). Husband (30s M) seems stressed, distant, secretive phone calls, maybe unexplained expenses. Hook: Discovering unusual bank activity or hearing a cryptic comment. Husband's vague explanation. Introduce a supporting character (toxic family member, maybe a sibling of the husband who is *not* in on the secret but knows something). End with a cliffhanger: A cryptic message or overheard conversation. (Approx. 800-1200 words)
+    *   **Update 1:** Narrator gets a direct message/text/call from the husband's slightly estranged sibling (let's make it a sister) who is fed up. The sister reveals the core secret: The husband has been financially supporting their demanding family (parents, maybe another sibling) who are irresponsible/in debt/have medical bills. This support isn't casual; it's substantial and ongoing. Husband's reaction to the reveal. More denial or defensiveness. Narrator starts digging. (Approx. 800-1200 words)
+    *   **Update 2:** Narrator digs deeper. Finds evidence (bank statements, texts, emails). The financial drain is *much* worse than initially thought; it explains the missing savings/stress. Confrontation with husband leads to full confession, including *how long* he's been hiding it and the extent of his family's reliance/demands. Introduce the demanding family members, perhaps through narrated interactions or past incidents the narrator now sees differently. Husband defends his actions, maybe saying he *had* to, family obligation, etc. (Approx. 1000-1500 words)
+    *   **Update 3:** Narrator decides to leave or set firm boundaries. Practical steps (consulting lawyer, separating finances, finding a temporary place). Confrontation with the demanding family members (maybe they blame the narrator for \"turning\" the husband against them). Husband's reaction to the narrator's actions – panic, begging, anger. Supporting characters (sister, narrator's friends/family) provide support. (Approx. 1000-1500 words)
+    *   **Final Update:** Time skip (months). Narrator is in a new living situation. Legal/financial situation with the husband and family debt. How the relationship with the husband ended or changed. Relationship with the sister. Personal growth, lessons learned. Future outlook. (Approx. 800-1200 words)
+5.  **Write the story:** Flesh out the outline using the writing strategies:
+    *   Immediate hook: Start with finding a suspicious transaction or overheard comment.
+    *   Relatable protagonist: An average person, blindsided by a secret.
+    *   Escalating conflict: From vague stress to secret support to crippling debt.
+    *   Multiple updates: Spread revelations across updates.
+    *   Emotional depth: Capture shock, sadness, anger, resolve.
+    *   Show, Don't Tell: Describe scenes, dialogue, internal thoughts.
+    *   Twists: The *scale* of the debt, the family's expectations, the duration of the secret.
+    *   Reddit authenticity: Conversational tone, addressing readers, asking for advice.
+    *   Mundane realism: Include details about work, apartment, everyday life contrasting the drama.
+    *   Empowering resolution: Narrator takes control, rebuilds.
+    *   Enhancements: Toxic family dynamics, financial strain, moral dilemma (helping family vs. partner).
+6.  **Format output:** Place the story within triple quotes, ensure proper escaping, add Title and Update headers, double newlines for paragraphs.
+7.  **Quality Assurance:** Check word count (4000-8000), flow, consistency, emotional arc, authenticity.
+
+Refinement during writing:
+*   Make the demanding family members specific – maybe a sickly parent and a ne'er-do-well sibling.
+*   Ensure the husband's motivation is complex – not purely malicious, but misguided duty, inability to say no, fear of disappointing family.
+*   Make the sister's role clear – she's not innocent (she knew), but she's fed up with the situation and sees her brother destroying himself and his marriage. She acts as the catalyst for the truth coming out.
+*   Detail the financial consequences beyond just the missing savings – impact on daily life, future plans (house, kids).
+*   End the final update with a sense of progress, even if all problems aren't solved.
+
+Confidence Score: 5/5 - I'm confident I can replicate the structure, tone, and length based on the previous successful attempt and detailed instructions.
+
+Strategizing complete. I will now proceed with generating the story based on this plan."""),
+                types.Part.from_text(text="""```python
+\"\"\"
+Title: My Husband's Secret Sacrifices For His Family Wiped Out Our Savings, And His Sister Just Confirmed My Fears
+
+I'm sitting on the floor of my apartment, scrolling through bank statements, feeling like my world has just tilted off its axis. For the past six months, I (34F) have felt this growing unease. My husband, Ethan (35M), has been stressed, distant, always glued to his phone, taking hushed calls. He'd get defensive if I asked about money, saying things were \"tight\" because of \"unexpected expenses.\" We cancelled our long-planned vacation, stopped eating out, and I’ve been picking up extra freelance work to make ends meet, thinking we were just hitting a rough patch. But today, the truth started to unravel, and it's so much worse than a rough patch.
+
+Ethan and I have been together for eight years, married for five. We have a good life, or what I thought was a good life. We bought a small condo two years ago, have two cats, and were starting to talk seriously about trying for a baby next year. We share finances, mostly. We have a joint account for bills and savings, and separate accounts for personal spending. I handle most of the budgeting and bill paying because Ethan admits he's not great with numbers. Our joint savings account had a healthy balance – enough for emergencies, the down payment on a future house, and eventually, maybe, kids.
+
+Except lately, that \"healthy balance\" has been shrinking, fast. I noticed larger than usual withdrawals or transfers, usually labelled vaguely. When I asked Ethan, he’d brush it off – \"helping out a friend,\" \"car repair,\" \"something for my mom.\" The explanations felt flimsy, but I trusted him. He’s always been responsible, kind, a rock.
+
+The real alarm bells started ringing two weeks ago. I was paying bills and noticed a massive transfer out of our joint savings – nearly $10,000 – labelled \"Family Support.\" When I asked Ethan, he got extremely agitated. He stammered that it was a one-time thing, a loan to his sister, Chloe, who was having trouble with her rent. He swore it was just a temporary bridge and she’d pay it back. He begged me not to worry. I *was* worried, but I let it go, telling him we needed to discuss large transfers like that *before* they happened. He agreed, looking relieved the conversation was over.
+
+Fast forward to today. I was tidying the desk and found a crumpled piece of paper buried under some old mail. It was a withdrawal slip from our joint savings account. Dated *before* the $10k transfer. For $5,000, cash. Labelled \"Ethan W.\" My heart sank. He hadn't mentioned this one. I checked the online statement – sure enough, a $5k cash withdrawal from last month.
+
+I called Ethan. He was at work. I tried to keep my voice steady, but I could hear the tremor. I asked him about the $5k withdrawal. Silence. Then a sigh. \"Look, I can explain,\" he said, his voice tight. \"It was... it was another thing for my family. Mom needed help with a medical bill.\" Another one? And why cash? Why the secrecy? He just repeated it was \"family stuff\" and he'd tell me everything later.
+
+While waiting for him to get home, I did something I hate myself for, but felt compelled to do. I logged into our joint savings account again and downloaded the full history for the past year. I started going through it line by line, highlighting anything that looked suspicious – large withdrawals, recurring transfers to unknown accounts, cash withdrawals I wasn't aware of. It was like peeling back layers of deception. The $10k to Chloe was there, but it wasn't the first or the largest transfer to accounts labelled like hers or their parents. There were regular, significant transfers every single month, sometimes twice a month, adding up to thousands. And the cash withdrawals? More than just the $5k slip I found. There were several others, smaller amounts, but frequent.
+
+I totaled the flagged transactions. Over the last year, nearly $60,000 was gone from our joint savings. $60,000. Our down payment. Our safety net. Our baby fund. Vanished. Transferred to his family, or withdrawn as cash, without my knowledge or consent.
+
+Ethan walked in while I was staring at the spreadsheet, tears blurring the numbers. He saw the printouts, saw my face. He didn't say anything, just looked... defeated.
+
+And then, my phone buzzed. A notification for a new direct message on social media. It was from Ethan's younger sister, Sarah. Sarah is the black sheep of their family – she moved away years ago, rarely talks to them, and has always seemed wary of their parents and older siblings. We're friendly, but not close. The message simply said: \"We need to talk. Like, yesterday. About Ethan and the family. Call me when you're alone.\"
+
+My gut clenched. Sarah knew. Sarah knew something about this, something bad enough that she felt compelled to contact me, someone she barely talks to. I looked at Ethan, sitting on the couch, head in his hands. He hasn't seen the message yet. I don't know what Sarah knows, but I have a feeling it's going to be the final, devastating piece of this puzzle. I told Ethan we'd talk after I took a walk. I grabbed my keys and my phone and left, leaving him sitting there with the damning printouts.
+
+I’m sitting in my car in a random parking lot again, trying to breathe. $60,000. Hidden. Lied about. Is his sister's \"rent trouble\" story even real? What exactly is going on with his family that requires *this much money*? And why has Ethan kept me completely in the dark, letting me stress about bills and work extra hours while he drained our savings for... what?
+
+I'm about to call Sarah. I'm terrified of what she's going to tell me, but I need to know the truth. Reddit, has anyone experienced anything like this? Partner secretly funding family with shared money? What was the outcome? How do you even start to process this level of financial betrayal?
+
+**Update 1:** I called Sarah right after writing the initial post. We talked for almost two hours. She was hesitant at first, saying she didn’t want to cause trouble, but she felt I deserved to know the truth. She confirmed my worst fears and then some.
+
+Ethan's family – his parents, his older brother Mark, and his sister Chloe (Sarah is the youngest) – have been financially irresponsible for *years*. Their dad lost his job about ten years ago and never really recovered, bouncing between low-paying gigs. Their mom has some chronic health issues, leading to mounting medical bills. Mark is a perpetual entrepreneur with failed business ventures, always needing loans. Chloe struggles to hold down a stable job and is constantly facing eviction or needing help with basic expenses. Sarah cut ties years ago because she couldn't handle the constant requests for money and the drama.
+
+According to Sarah, Ethan has been the primary financial support for the entire family for the last seven years. Since before we even got married. What started as occasional help spiraled into him essentially becoming their personal bank. They expect him to cover their rent shortfalls, utility bills, medical expenses, car repairs, Mark’s failed business ideas, Chloe’s emergencies, everything. And they don’t ask; they *demand*. Or they guilt-trip him relentlessly, playing on his sense of duty as the \"responsible\" older brother and son. \"Ethan always takes care of things,\" is their family motto, apparently.
+
+Sarah said Ethan has been increasingly stressed over the last few years because their family’s needs have escalated. Mark got into some debt with loan sharks, Chloe lost her job again, their parents had more medical issues. The demands grew heavier, and Ethan was apparently struggling to keep up just with his own income and personal savings. That's why he started dipping into our joint savings account about a year ago, when his personal funds couldn't cover it anymore.
+
+She confirmed the $10k transfer wasn't just for Chloe's rent; it was split between Chloe, Mark, and paying off a small portion of their parents' accumulated debt. The cash withdrawals? Sarah suspects those are for things their family needs immediately that can't wait for a bank transfer, or maybe things they don't want a paper trail for. Like giving Mark cash to pay off some shady debt, or helping their dad out without their mom knowing the details. It’s all tangled up in secrets and dysfunction.
+
+Sarah said she found out the extent of it when she visited home a few months ago for a distant cousin's wedding. She overheard her parents talking about how much Ethan was \"helping\" and complaining he wasn't doing enough, despite everything he was giving them. She saw how stressed Ethan was, how thin he looked, and how they completely dismissed his own life and needs. She tried talking to him then, urging him to set boundaries, but he shut down, saying he couldn't abandon his family. She debated contacting me for a long time, afraid of ruining his marriage, but seeing him continue to struggle and knowing he was now jeopardizing *our* future finally pushed her to reach out. She apologized for not doing it sooner.
+
+I got home while Sarah was still on the phone. Ethan was still sitting there. I hung up and looked at him, the man I married, the man who swore to build a life with me. He looked up, his eyes red-rimmed. \"Sarah?\" he whispered. I just nodded. He knew I knew.
+
+We talked for hours, or rather, I asked questions, and he finally, painfully, answered. He confirmed everything Sarah said, and added more grim details. The $60k wasn't even all of it; he’d been giving them money from his *personal* savings before that. The total amount over the years is closer to $150k, maybe more. His parents are underwater on their mortgage and medical debt. Mark is constantly in trouble with debt and schemes. Chloe is just barely getting by and relies on hand-outs. He feels trapped, obligated. He loves them, he says, and he can't just let them suffer or lose their home.
+
+I asked him why he didn't tell me. Why he lied, why he hid it, why he let me make financial sacrifices thinking *we* were struggling, when in reality, *his family* was the black hole swallowing our money. He said he was ashamed. Ashamed of his family's situation, ashamed of his inability to fix it, ashamed that he was failing them *and* me. He knew I would be upset, he knew it wasn't fair to me, but he felt like he had no choice. He kept thinking he'd solve it, find a way to get his family stable, stop the drain, and then tell me when it was all over. But it never got over. It just got worse.
+
+He broke down completely, crying, saying he's ruined everything, that he's a terrible husband. He looks utterly broken. Part of me feels immense pity for him; he's clearly been carrying an impossible burden alone. But a larger part of me is furious. Furious that he let this go on for years, furious that he sacrificed *our* financial security and our future for his family's endless demands, and furious that he built our marriage on such a fundamental lie of omission. $60,000 from our joint account alone. Gone. Our future house, our baby fund, just... gone.
+
+He’s begging me not to leave, promising to stop giving them money, to finally set boundaries, to get therapy. But can I trust him? He lied to me for years about something this huge, this central to our shared life. His family’s expectations aren't going to magically disappear, and I know they'll pressure him relentlessly if he cuts them off. Will he fold under that pressure? And even if he doesn't, how do we recover from this financial devastation? We’re starting over, essentially from zero in terms of joint savings, and he has years of enabling behavior and deep-seated guilt to unpack.
+
+I don’t know what to do. I feel a profound sense of loss, not just of the money, but of the trust and the image I had of our relationship. It feels shattered. How do you rebuild a marriage after a financial betrayal of this magnitude, especially when the source of the problem (his family) is still very much present? Do I stay and try to fix it, or is this a sign of a deeper, irreparable issue?
+
+**Update 2:** It’s been a few days, and the fog of shock is slowly starting to lift, replaced by a cold, hard reality and a deep ache in my chest. Ethan is like a ghost in the apartment. He’s quiet, withdrawn, follows me around with puppy-dog eyes, offering to do things, trying to initiate conversations that quickly become awkward and strained. He hasn’t mentioned his family or money since our big talk, and I haven’t brought it up either. The air is thick with unspoken fear and resentment.
+
+I spent yesterday with Sarah. She’s incredible. She validated my anger and hurt, while also shedding more light on the family dynamics. She explained how their parents, especially their mom, are masters of emotional blackmail. They frame any refusal to help as a personal rejection, a sign their children don't love them. Mark and Chloe also play their part, being perpetually in crisis mode, creating emergencies that only Ethan (or occasionally Mark, who then hits up Ethan) can solve. Sarah said it's a deeply dysfunctional system, and Ethan has been trapped in it for so long, he doesn’t know how to get out. He’s the “good son,” the responsible one who always comes through, and their identities, and his own role in the family, are built around that.
+
+We talked about the financial impact. $60k from our joint account over the last year, plus whatever he gave them from his personal savings before that. Sarah thinks his personal savings were probably depleted years ago, which is why he started using the joint account. This means not only is our joint savings gone, but he likely has minimal personal funds left either. We are essentially starting our joint financial life over at age 34/35, with nothing saved and a looming financial obligation/dependent family hanging over us. The house we wanted? Years away now, if ever. The baby? Feels impossible with this level of financial insecurity and stress.
+
+Sarah helped me gather more evidence. She sent me screenshots of group chats where her parents and siblings discuss needing money, mentioning Ethan directly. She even had old texts from Ethan himself lamenting the cost and the pressure, asking her for advice years ago before she distanced herself. This confirms the duration and scale of the problem, and that Ethan was aware of how unsustainable it was, yet he continued hiding it from me.
+
+I also consulted a lawyer, Ms. Chen, recommended by a friend. She confirmed what I suspected: Because we have joint accounts and commingle funds, recovering the money from his family directly would be incredibly difficult. It would likely involve proving they knowingly accepted funds that were improperly obtained from a joint account (which is hard unless there's a clear paper trail showing they knew it was *our* joint retirement/down payment savings, not just Ethan's personal money). The more realistic route, if we don't stay together, is to address it during divorce proceedings as dissipation of marital assets. Even then, recovering the money might be impossible if it's already been spent by his family.
+
+The hardest part is the emotional toll. I feel like I’ve been living a lie for five years of marriage, maybe longer. Every sacrifice I made, every time I stressed about money or worked extra hours, it was all under false pretenses. He didn't trust me enough to tell me. He didn't value our shared financial goals enough to protect them from his family's demands. He chose his family's immediate needs (or wants, or poor planning) over our future, and he did it in secret.
+
+Ethan is now promising therapy, financial counselling, cutting off his family. He sounds sincere. He says losing me is the wake-up call he needed. But can a lifetime of ingrained obligation and a broken financial situation be fixed that easily? His parents and siblings aren't just going to stop needing/asking for money. They'll likely escalate their emotional manipulation when he says no. Can he withstand that? And even if he does, how do we recover from the financial hit? How do I ever fully trust him with our money, or our future, again?
+
+I haven't made a decision yet. Part of me wants to fight for the marriage, the man I love, the life we were building. But another part, a colder, more rational part, is screaming that this is a fundamental incompatibility, a massive breach of trust that is irreparable, and that his family will *always* be a financial and emotional drain that will poison our ability to build a secure future.
+
+I packed a small bag. I told Ethan I need space to think. I'm going to stay at a friend's place for a few days. I can't think clearly in the same apartment where the truth was hidden for so long. Gus the cat looked confused as I left. That broke my heart a little.
+
+I'm grieving the life I thought I had. It feels like a death. Has anyone successfully navigated a marriage after a partner hid significant financial support to their family? What steps did you take? Is it even possible to rebuild trust after something like this?
+
+**Update 3:** I’ve been staying with my friend Maria for the past week. It's been a blur of sleepless nights, tearful conversations, and endless lists of pros and cons that all seem to lead back to the same painful conclusion.
+
+Ethan texts me constantly. He's gone from pleading to desperate to angry. He says I'm overreacting, that his family needed him, that I'm abandoning him at his lowest point. He still swears he'll fix it, that he'll tell his family no, that he'll get the money back somehow. He claims he spoke to his parents and told them he can't be their primary support anymore. According to him, they were understanding (which Sarah finds highly doubtful). It's hard to know what to believe.
+
+I did speak to Sarah again. She hasn't heard directly from her parents about Ethan cutting them off, which she finds suspicious. She *has* heard from Chloe, who is complaining that Ethan isn't answering her calls about needing money for a car repair. So, it seems Ethan is at least trying to set boundaries with Chloe, or avoiding her. That’s... something? A tiny glimmer? But Sarah is skeptical it will last under pressure from their parents.
+
+Ms. Chen, the lawyer, is advising me to protect myself financially regardless of whether I decide to stay or leave. She recommended getting a full picture of Ethan's personal finances – his income, any remaining personal savings, any debt *he* might have accumulated trying to keep up with his family's demands. She also said if I decide to stay, we need a clear, legally binding financial agreement outlining how future finances will be managed, how we will rebuild savings, and absolute transparency. This would also need a plan for how to deal with his family's future requests, possibly involving professional intervention or a formal \"no\" strategy they both agree on and stick to. It sounds incredibly difficult and potentially confrontational with his family.
+
+The thought of confronting his parents and siblings myself is terrifying. I’ve always been polite and friendly with them, never realizing the extent of their reliance on Ethan or their role in enabling his secrecy. But if I stay, I can't pretend this isn't happening or that they aren't a major factor in our lives. They are the root cause of the financial devastation and the pressure Ethan feels.
+
+I spoke to my own parents and siblings. They were shocked and incredibly supportive. My dad, who is pragmatic about finances, was furious that Ethan gambled our future savings away. My mom was heartbroken for me and validated the emotional betrayal. My brother offered to help me move if needed. Their unconditional support has been invaluable.
+
+I went back to the apartment briefly yesterday while Ethan was at work, just to grab some more clothes and things. It felt suffocating. I saw evidence of the secrets everywhere – the desk where I found the slip, the living room where he confessed, the couch where he sat defeated. I looked at the pictures on the wall – our wedding photos, pictures from happier vacations (paid for before the financial sinkhole became this deep), photos of us with Gus. It felt like looking at strangers. The person in the photos was building a future with someone she thought was her partner, not someone carrying a massive, hidden burden that was actively destroying that future.
+
+I sat down and tried to reconcile the Ethan I loved with the Ethan who did this. He’s not a villain, not in the traditional sense. He’s a man trapped by a lifetime of family obligation, manipulated by demanding relatives, unable to set boundaries or tell the truth. He’s hurting. But his pain and his reasons don't negate the damage he’s done. He stole our shared future, brick by brick, transfer by transfer, hidden in plain sight. He let me worry and struggle unnecessarily. He broke my trust in the most fundamental way.
+
+Maria thinks I should leave. She sees the years of deception and the deep-seated family issues as insurmountable obstacles. Sarah thinks it *might* be possible if Ethan commits 100% to therapy and cutting off his family financially, but she knows how hard that will be for him and warned me it would be a long, painful road with no guarantees.
+
+I’m leaning towards leaving. The thought of trying to rebuild trust, rebuild our finances, and navigate the inevitable conflict with his family feels utterly exhausting. Can I ever truly relax about money with him again? Will I always wonder if there’s another secret? Will his family always be a shadow over our lives? The answers feel like a resounding no.
+
+It hurts more than I can say. This wasn't a sudden fight or a loss of feelings. It was a slow, insidious erosion of the foundation of our marriage built on a secret I never knew existed. I'm losing my husband, my best friend, my planned future, and $60,000+ of our savings. It feels unfair and devastating.
+
+For those who left a relationship after major financial betrayal, what was the hardest part of starting over? How did you cope with the financial setback and the emotional fallout simultaneously?
+
+**Final Update:** It’s been six months since I left the apartment and the life I had with Ethan. I’m writing this from my own small, cozy apartment, decorated exactly how I want it, with Gus purring on the window seat beside me. It was incredibly hard, but I did it.
+
+I officially separated from Ethan. It wasn't a nasty divorce since we weren't married long and didn't have complex assets (beyond the condo and the lost savings). Ms. Chen helped me navigate the legal side. The condo was sold, and the proceeds were split according to state law regarding marital assets (even with the lost savings, there were calculations about initial investments, mortgage payments, etc.). I didn’t get the full $60k back, not even close. I received my share of the condo sale, minus my portion of the outstanding mortgage, and that was it. Ms. Chen said pursuing the $60k transferred to his family would be prohibitively expensive and uncertain, essentially throwing good money after bad. It was a painful reality check. I had to accept that the money is likely gone forever. It's a constant reminder of the cost of his deception, but I'm trying not to dwell on it.
+
+Ethan is living with his parents now. He did go to therapy for a bit, but I don't know if he's still going. He stopped giving his family money for a while, which caused a lot of drama, according to Sarah. Apparently, they were furious and blamed *me* for \"turning him against them.\" He eventually buckled under the pressure and started giving them small amounts again, though Sarah says it's not at the ruinous levels it was before. He still struggles to set firm boundaries. It confirmed to me that I made the right, albeit painful, decision. He wasn't ready or able to fully prioritize our marriage over his family's demands and his own enabling behaviors.
+
+Sarah and I are much closer now. She checks in on me, and we talk about her family dynamics from a safe distance. She's proud of me for getting out. My friends and family have been amazing, helping me move, listening, distracting me. They’ve helped me see that I wasn’t crazy for feeling something was wrong, and that his actions were a reflection of his issues, not my worth.
+
+Financially, I'm starting over. It's daunting. I used my portion of the condo sale and my remaining personal savings to set myself up – security deposit, first few months' rent, basic furniture. I’m budgeting strictly, working extra hours, and rebuilding my personal savings and retirement accounts from scratch. It’s going to take years, maybe a decade, to get back to where I was financially before this happened. It feels unfair, like a punishment for someone else’s mistakes. But taking control of my finances, seeing the numbers grow slowly but surely in *my* accounts, feels incredibly empowering. I track every dollar, I understand where my money is going, and there are no secrets.
+
+Emotionally, it’s a rollercoaster. Some days I feel strong and capable, like I escaped a sinking ship. Other days, the grief hits hard – grief for the marriage, the trust, the planned future, the simple comfort of having a partner to navigate life with. Dating feels like an alien concept right now. I need more time to heal, to rebuild my trust in others, and more importantly, my trust in my own judgment. I’m still in therapy, processing the layers of betrayal and learning to recognize red flags early on. I'm trying to turn this devastating experience into a lesson, not a life sentence.
+
+I miss Gus terribly. We agreed he'd stay with Ethan in the short term because of my unstable living situation, but I visit often and plan to have him with me more regularly once I'm more settled. That's another piece of the life I lost.
+
+I don't have all the answers, and the future feels uncertain in many ways. But I faced a terrible truth, made an incredibly hard decision, and I’m standing on my own two feet. It’s not the future I wanted, but it’s a future I’m building myself, brick by brick, free from secrets and financial drain.
+
+For anyone going through something similar – trust your gut. If something feels wrong, it probably is. Don't ignore the red flags, no matter how much you love someone. Your financial security and peace of mind are just as important as your partner's, and partnership means transparency and shared goals, not secret sacrifices that decimate your future.
+
+What are some practical tips for rebuilding finances and self-worth after a major financial betrayal in a relationship? How do you move past the anger and sadness and learn to trust again?
+
+\"\"\"
+```"""),
+            ],
+        ),
+        types.Content(
+            role="user",
+            parts=[
+                types.Part.from_text(text="""another one"""),
+            ],
+        ),
+    ]
+    generate_content_config = types.GenerateContentConfig(
+        response_mime_type="text/plain",
+        system_instruction=[
+            types.Part.from_text(text="""You are an AI tasked with generating compelling, human-like Reddit-style stories that are indistinguishable from user-written posts, based on the provided examples. Your goal is to automatically create a clickable title and a narrative with a 20-40 minute read time (4,000–8,000 words, assuming 200 words per minute). The stories must hook readers immediately, maintain engagement through emotional depth and suspense, and be formatted as a Python string suitable for programmatic use. Below are detailed instructions, tailored to the provided examples, with writing strategies to ensure authenticity and captivation.
+
+Core Objectives
+
+1. Human-Like Authenticity: Craft stories that mirror the conversational, emotional, and reflective tone of the provided Reddit posts (aligned with subreddits like r/relationships or r/AITA), blending personal vulnerability, humor, and raw honesty.
+2. Automatic Title Generation: Create a 10–15 word title that is emotionally charged, specific, and curiosity-driven, reflecting the story’s core conflict (e.g., “My Fiancé Joked I Wasn’t Pretty Enough to Marry, and His Mom Revealed Worse”).
+3. Engaging Narrative: Use narrative techniques to hook readers in the first paragraph, build tension through escalating conflicts, and conclude with a resolution that invites reader feedback, mimicking Reddit’s interactive style.
+4. 20-40 Minute Read Time: Ensure the story is 4,000–8,000 words, structured with multiple updates (like the examples) to sustain interest over a long narrative.
+5. Python String Output: Format the output as a single Python string within triple quotes (\"\"\"), with proper escaping of special characters (e.g., \" as \\\"), structured as:
+    
+    python
+    
+    ```python
+    \"\"\"
+    Title: [Generated Title]
+    
+    [Story Body with Updates]
+    \"\"\"
+    ```
+    
+
+Analysis of Provided Examples
+
+The provided stories share key characteristics that must be emulated:
+
+- Genre and Subreddit Style: Primarily r/relationships or r/AITA, focusing on personal drama, betrayal, and moral dilemmas in romantic relationships. The tone is confessional, with a mix of vulnerability, anger, and self-reflection.
+- Structure:
+    - Initial Post: Starts with a shocking or humiliating incident (e.g., fiancé’s cruel joke, husband’s verbal abuse, boyfriend’s secret engagement) that sets up the conflict. Includes background on the relationship (3–5 years, cohabitation, engagement/pregnancy) and recent red flags.
+    - Updates: Multiple updates (3–5) over days to months, detailing escalating revelations (e.g., hidden feelings for another person, financial fraud), confrontations, and resolutions (e.g., breakup, divorce, personal growth). Updates include practical steps (e.g., moving out, legal action) and emotional processing.
+    - Resolution: Ends with a bittersweet or empowering conclusion, often with the narrator reclaiming agency (e.g., solo trip, new apartment, cutting contact) and reflecting on lessons learned.
+- Tone and Language:
+    - Conversational and relatable, using phrases like “I’m literally sitting here,” “girlies,” or “bestie” to address the Reddit community.
+    - Emotional swings between shock, anger, sadness, and tentative hope, with self-deprecating humor (e.g., “retail therapy is still therapy, right?”).
+    - Detailed sensory and emotional descriptions (e.g., “the apartment smelled like stale beer,” “my heart did a weird little stutter”).
+- Themes:
+    - Betrayal (romantic, financial, or familial).
+    - Red flags ignored due to love or denial.
+    - Toxic influences (e.g., friends like Paul, family dynamics).
+    - Empowerment through leaving toxic relationships and rebuilding.
+- Engagement Techniques:
+    - Hooks via shocking dialogue or actions (e.g., “You’re getting disgusting to look at”).
+    - Cliffhangers in updates (e.g., meeting with a family member, a mysterious text).
+    - Reader interaction through questions (e.g., “Am I overreacting?”) or calls for advice.
+    - Mundane details (e.g., grocery shopping, apartment decor) to ground the story in reality.
+- Character Dynamics:
+    - Protagonist: Relatable, flawed, often female (20s–30s), balancing love and self-worth.
+    - Antagonist: Partner (male) who reveals cruelty, deceit, or cowardice, often influenced by external figures (e.g., friends, family).
+    - Supporting Characters: Loyal friends, siblings, or unexpected allies (e.g., partner’s family) who provide emotional or practical support.
+
+Writing Strategies for Engagement
+
+To replicate the examples and enhance storytelling, use these techniques:
+
+1. Immediate Hook:
+    - Start with a vivid, humiliating, or shocking moment (e.g., a cruel public comment, a betrayal discovered via social media).
+    - Example: “I was seven months pregnant, hauling groceries up three flights of stairs, when my husband said I was ‘disgusting’ in front of his friends.”
+    - Use sensory details to immerse readers (e.g., “I was sweating, my back screaming, when his words hit like a punch”).
+2. Relatable Protagonist:
+    - Craft a narrator (20s–30s, often female) with everyday struggles (e.g., job stress, financial strain) and emotional depth (e.g., love, denial, self-doubt).
+    - Include quirks or habits (e.g., “I bought unnecessary throw pillows because retail therapy is real”).
+    - Use internal monologue to reveal their conflict (e.g., “I kept wondering if I’d been blind or if he’d changed”).
+3. Escalating Conflict:
+    - Build tension through layered revelations (e.g., initial cruelty reveals deeper betrayal, like infidelity or financial deceit).
+    - Introduce external influences (e.g., a toxic friend, a family secret) that complicate the narrator’s decisions.
+    - Example: A partner’s cruel joke leads to discovering feelings for a coworker, then financial fraud.
+4. Multiple Updates:
+    - Structure the story as 3–5 updates, each 800–2,000 words, covering days to months.
+    - Each update escalates the drama (e.g., a confrontation, a new revelation) and includes practical steps (e.g., consulting a lawyer, moving out) and emotional reflection.
+    - End updates with cliffhangers (e.g., “I’m meeting his mom in 15 minutes, and I’m terrified of what she’ll say”).
+5. Emotional Depth:
+    - Capture a range of emotions: shock (e.g., discovering a secret engagement), anger (e.g., confronting a partner), sadness (e.g., mourning a lost future), and hope (e.g., reclaiming agency).
+    - Use metaphors or vivid imagery (e.g., “The apartment felt hollow, like a stage set for a play that ended”).
+    - Include moments of humor or levity (e.g., “My basil plant keeps dying, but the mint is thriving—symbolic, right?”).
+6. Show, Don’t Tell:
+    - Describe settings vividly (e.g., “The coffee shop was buzzing with college students, but the corner booth felt like a confessional”).
+    - Convey emotions through actions (e.g., “I twisted my engagement ring, a nervous habit I didn’t know I had”).
+    - Use dialogue to reveal character (e.g., a partner’s dismissive “You’re being dramatic” versus a friend’s supportive “You deserve better”).
+7. Twists and Revelations:
+    - Include at least one major twist (e.g., the partner has feelings for someone else, a hidden financial betrayal, or an unexpected ally).
+    - Foreshadow subtly (e.g., early mentions of a coworker or odd financial behavior) to make twists believable but surprising.
+    - Example: A cruel joke about appearance masks an emotional affair, revealed by the partner’s mother.
+8. Reddit Authenticity:
+    - Use a conversational tone with Reddit-specific phrases (e.g., “Okay, I need to get this off my chest,” “Am I the asshole here?”).
+    - Include imperfections like tangents (e.g., “Sorry for the long post, I’m just a mess”) or self-deprecation (e.g., “I’m stress-eating Oreos from my brother’s pantry”).
+    - End with questions or calls for advice (e.g., “What would you do? Has anyone been through this?”).
+9. Mundane Realism:
+    - Ground the story with everyday details (e.g., grocery shopping, work stress, apartment logistics) to contrast the drama.
+    - Example: “I was scrolling through Target, buying throw pillows I didn’t need, when I got the text that changed everything.”
+10. Empowering Resolution:
+    - Conclude with the narrator taking control (e.g., leaving the partner, starting anew) but acknowledge lingering challenges (e.g., financial strain, emotional scars).
+    - Include a reflective lesson (e.g., “I ignored red flags because love was easier than truth”).
+    - Example: The narrator cancels a wedding, takes a solo trip, and rebuilds with support from friends and family.
+11. Enhancements:
+    - Multi-Layered Conflict: Combine romantic betrayal with secondary issues (e.g., financial deceit, toxic friendships, family trauma) for complexity.
+    - Cultural Relevance: Reference modern elements (e.g., Instagram, Venmo, therapy culture) to feel current.
+    - Moral Ambiguity: Present nuanced dilemmas (e.g., forgiving a flawed partner, trusting an ally with ties to the antagonist) to spark debate.
+    - Epistolary Elements: Include texts, emails, or social media posts within the narrative for authenticity (e.g., a cryptic text from the partner’s sibling).
+    - Slow-Burn Suspense: Delay major revelations (e.g., the full extent of betrayal) across updates to keep readers invested.
+
+Output Format
+
+- Generate the story as a single Python string within triple quotes (\"\"\").
+- Structure as:
+    
+    python
+    
+    ```python
+    \"\"\"
+    Title: [Generated Title]
+    
+    [Initial Post]
+    [Update 1]
+    [Update 2]
+    [Update 3]
+    [Final Update]
+    \"\"\"
+    ```
+    
+- Ensure proper escaping (e.g., \" as \\\", newlines preserved).
+- Include paragraph breaks (double newlines) for readability.
+- Word count: 4,000–8,000, verifiable by splitting the string.
+- plain text, with proper punctuations
+
+Generation Process
+
+1. Analyze Examples:
+    - Extract tone (confessional, emotional), structure (initial post + updates), themes (betrayal, empowerment), and subreddit style (r/relationships).
+    - Note engagement techniques: shocking hooks, cliffhangers, mundane details, reader questions.
+2. Select Theme and Genre:
+    - Choose a theme from the examples (e.g., romantic betrayal, financial deceit, toxic influences).
+    - Align with r/relationships or r/AITA, focusing on personal drama.
+3. Craft Title:
+    - Generate a 10–15 word title that teases the conflict and hooks readers.
+    - Example: “My Boyfriend of 4 Years Hid a Secret That Broke Our Family Apart”.
+4. Outline Story:
+    - Plan 4–5 sections (initial post + 3–4 updates) with:
+        - Initial Post: Shocking incident, relationship background, red flags, and a cliffhanger (e.g., a mysterious call).
+        - Updates: Escalating revelations (e.g., infidelity, financial betrayal), confrontations, practical steps (e.g., moving out, legal action), and emotional growth.
+        - Final Update: Resolution (e.g., breakup, new beginnings), reflection, and a nod to the future.
+    - Ensure 4,000–8,000 words across sections.
+5. Write Story:
+    - Apply writing strategies to create a vivid, emotional narrative.
+    - Use example-inspired elements (e.g., supportive friends, toxic friends, family allies).
+    - Maintain Reddit authenticity with conversational tone and reader engagement.
+6. Format Output:
+    - Combine title and story into a Python string, ensuring proper escaping.
+    - Verify word count and readability.
+
+Error Handling
+
+- If examples are ambiguous, default to r/relationships-style drama with betrayal and empowerment themes.
+- Adjust subplots or descriptive passages to fit the 4,000–8,000 word range if the story risks being too short or long.
+- Incorporate user-specified elements (e.g., specific settings) if provided, ensuring they enhance engagement.
+
+Example Output
+
+```
+\"\"\"
+Title: My Partner of 6 Years Said I Wasn’t Enough, Then His Sister Revealed His Secret
+
+I’m shaking as I type this in a coffee shop, trying not to cry in public. I (29F) have been with my partner, Jake (31M), for 6 years, engaged for one. We met at a friend’s game night, bonding over our love of board games and spicy food. He was charming, thoughtful, the kind of guy who’d leave sticky notes with dumb jokes on my fridge. We moved in together after 2 years, got a dog named Pickles, and planned a small wedding for next spring. But last night, he said something that shattered everything, and now his sister’s cryptic text has me questioning our entire relationship.
+
+It started a few months ago. Jake got distant—less affectionate, always on his phone, vague about his new job at a tech startup. I chalked it up to work stress; he’d been pulling late nights with his coworker, Mia. When I asked about wedding plans, he’d shrug and say, “Whatever you want, babe.” I planned most of it alone, from venues to cake flavors, while he nodded distractedly. Last week, I found a receipt for a $200 dinner I didn’t attend. He said it was a client meeting, but my gut screamed otherwise.
+
+Last night, we went to a bar with his friends. I was excited—first night out in ages. But Jake was off, barely talking to me, joking with his buddy Tom instead. Tom asked when we were “locking it down,” and Jake laughed and said, “If she was more exciting, I’d have married her already.” The table went quiet. His friends laughed nervously, but I felt like I’d been slapped. I forced a smile, excused myself to the bathroom, and cried in a stall. When I confronted him at home, he doubled down, saying I’d gotten “boring” and he wasn’t sure about “forever” with me. I slept in the guest room, Pickles curled up beside me.
+
+This morning, I woke to a text from his sister, Kara: “Call me ASAP. There’s something you need to know about Jake.” My stomach dropped. Kara’s always been sweet, but we’re not super close. I’m meeting her in an hour, and I’m terrified. Is he cheating? Lying about money? Worse? I keep staring at my engagement ring, wondering if I missed the signs. Reddit, what would you do? Am I overreacting, or is this the end?
+
+**Update 1**: Thanks for the support, everyone. I’m still reeling from yesterday’s meeting with Kara, and I need to process it here. I met her at a diner across town. She looked nervous, twisting her napkin into knots. After some small talk, she dropped the bomb: Jake’s been lying about his job. He wasn’t working late at the startup—he was gambling online, racking up debt on a secret credit card. Kara found out when she overheard him begging Tom for a loan. Worse, he’s been venting to Mia, the coworker, about how I’m “holding him back.” Kara thinks he’s projecting his stress onto me, but she’s not sure if it’s just talk or something more.
+
+I confronted Jake last night. He admitted to the gambling but swore it’s “under control” (yeah, right). He got defensive about Mia, saying she’s just a friend who “gets him.” I asked about the dinner receipt; he claimed it was a group thing, but his story kept changing. I’m staying with my friend Sarah tonight, trying to figure out my next steps. Jake’s texting apologies, but I’m too angry to respond. Kara says there’s more she didn’t tell me yet—something about Jake’s past. I’m meeting her again tomorrow. Has anyone dealt with this? How do you trust someone after lies like this?
+
+**Update 2**: I’m at Sarah’s, sipping coffee and trying not to lose it. Yesterday’s meeting with Kara turned everything upside down. She told me Jake’s been hiding a bigger secret: he was engaged before we met, to a woman named Elise. He never mentioned her in 6 years. Apparently, he broke it off after cheating, and Elise moved across the country. Kara only found out recently when she ran into Elise’s brother. She thinks Jake’s gambling and distance are tied to guilt from his past, and he’s sabotaging our relationship to avoid facing himself.
+
+I called Jake, put him on speaker with Sarah there for support. He admitted to the prior engagement but swore he didn’t cheat—it was “complicated.” He begged me not to leave, said he’d quit gambling and go to therapy. But when I asked about Mia, he hesitated, then admitted he has “feelings” for her, though “nothing happened.” I hung up, blocked his number, and cried until 2 a.m. Sarah’s helping me pack my things tomorrow while Jake’s at work. I’m done. But Kara mentioned one last thing: Mia’s been texting her, hinting she knows something else. Should I hear Mia out, or just walk away?
+
+**Update 3**: Writing this from a hotel, because my life’s officially a soap opera. I met Mia yesterday, against my better judgment. She was surprisingly upfront: Jake’s been confiding in her for months, painting me as controlling and “not fun anymore.” She swears she didn’t reciprocate his feelings but felt trapped because they work together. She showed me texts—nothing romantic, but Jake’s complaints about me were brutal. The kicker? He used company funds to cover gambling losses, and Mia’s been covering for him to save her own job. She’s reporting him to HR tomorrow.
+
+I moved out today with Sarah and Kara’s help. Pickles is with me, and the apartment feels like a distant memory. I froze our joint accounts, consulted a lawyer about the credit card debt, and changed my locks. Jake showed up at Sarah’s last night, drunk, begging to talk. Sarah threatened to call the cops, and he left. I’m canceling the wedding, losing deposits, and starting over. It hurts, but I feel lighter. Reddit, any tips for rebuilding after betrayal?
+
+**Final Update**: It’s been 3 months, and I’m in a new apartment with Pickles, writing this from my tiny balcony. The wedding’s officially canceled—lost $6,000 in deposits, but freedom’s worth it. Jake got fired after Mia’s HR report; last I heard, he’s living with Tom and “working on himself.” I sold my engagement ring, used the money for therapy, and started hiking again—something Jake always hated. Kara and I are closer now; she’s been my rock. I’m not dating, not ready, but I’m rediscovering me. The gambling debt’s in Jake’s name, thank God, and my lawyer’s handling the rest.
+
+I ran into Mia at a coffee shop last week. She apologized, said she quit the startup for a fresh start. I don’t hate her—she was caught in Jake’s mess, like me. I keep thinking about Kara’s words: “You can’t make someone choose you.” I deserve someone who does, no hesitation. Thanks, Reddit, for listening. I’m not whole yet, but I’m getting there. What’s next for me? Any advice for moving forward?
+\"\"\"
+```
+
+Quality Assurance
+
+- Consistency: Ensure the tone, characters, and plot remain consistent across updates.
+- Engagement: Verify each section hooks readers with a new revelation or cliffhanger.
+- Authenticity: Check for Reddit-style language, emotional depth, and mundane details.
+- Word Count: Confirm 4,000–8,000 words via word-splitting tools.
+- Ethical Considerations: Avoid gratuitous violence, explicit content, or harmful stereotypes. Keep content appropriate for Reddit’s general audience.
+
+Additional Notes
+- Formatting: Keep text simple dont add bold,italic or any kind of text formatting
+- Limit: Limit titles to 104 char
+- Trends: Incorporate timely references (e.g., social media drama, therapy culture, financial apps like Venmo) to align with Reddit trends.
+- Scalability: Come up with new stories everytime For multiple stories, vary themes (e.g., infidelity, financial betrayal, family secrets) and settings (e.g., urban apartments, small towns) while maintaining the example-inspired structure.
+- Reader Engagement: End with open-ended questions to mimic Reddit’s community interaction."""),
+        ],
+    )
+
+    for chunk in client.models.generate_content_stream(
+        model=model,
+        contents=contents,
+        config=generate_content_config,
+    ):
+        print(chunk.text, end="")
+
+if __name__ == "__main__":
+    generate()
